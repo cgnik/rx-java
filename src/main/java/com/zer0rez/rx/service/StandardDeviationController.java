@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -36,6 +37,8 @@ public class StandardDeviationController {
     }
 
     public BigDecimal calculateStandardDeviation(BigDecimal[] points) {
-        return BigDecimal.valueOf(Stream.of(points).mapToDouble(d -> d.doubleValue()).average().getAsDouble());
+        BigDecimal mean = BigDecimal.valueOf(Stream.of(points).mapToDouble(d -> d.doubleValue()).average().getAsDouble());
+        BigDecimal variance = BigDecimal.valueOf(Stream.of(points).mapToDouble(d -> mean.subtract(d).doubleValue()).map(d -> d * d).average().getAsDouble());
+        return BigDecimal.valueOf(Math.sqrt(variance.doubleValue())).round(MathContext.DECIMAL32);
     }
 }

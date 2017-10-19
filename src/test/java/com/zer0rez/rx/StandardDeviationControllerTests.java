@@ -29,7 +29,7 @@ public class StandardDeviationControllerTests {
     static final BigDecimal[] _values;
 
     static {
-        List<BigDecimal> valuesl = Stream.of(9f, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4)
+        List<BigDecimal> valuesl = Stream.of(32, 22, 12.3, 4.33, 8.121, 0.231)
                 .map(d -> BigDecimal.valueOf(d.doubleValue()))
                 .collect(Collectors.toList());
         _values = new BigDecimal[valuesl.size()];
@@ -44,9 +44,7 @@ public class StandardDeviationControllerTests {
 
     @Test
     public void testCalcStdDev() {
-        BigDecimal expected = BigDecimal.valueOf(7f);
-        BigDecimal answer = _controller.calculateStandardDeviation(_values);
-        assertThat(expected).isEqualTo(answer);
+        assertThat(_controller.calculateStandardDeviation(_values)).isEqualTo(BigDecimal.valueOf(10.83474));
     }
 }
 
