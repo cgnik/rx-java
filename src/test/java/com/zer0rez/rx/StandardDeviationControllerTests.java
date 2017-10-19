@@ -44,7 +44,7 @@ public class StandardDeviationControllerTests {
 
     @Test
     public void testCalcStdDev() {
-        BigDecimal expected = BigDecimal.valueOf(4f);
+        BigDecimal expected = BigDecimal.valueOf(7f);
         BigDecimal answer = _controller.calculateStandardDeviation(_values);
         assertThat(expected).isEqualTo(answer);
     }

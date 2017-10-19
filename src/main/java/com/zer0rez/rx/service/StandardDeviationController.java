@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 public class StandardDeviationController {
@@ -35,6 +36,6 @@ public class StandardDeviationController {
     }
 
     public BigDecimal calculateStandardDeviation(BigDecimal[] points) {
-        return BigDecimal.valueOf(4f);
+        return BigDecimal.valueOf(Stream.of(points).mapToDouble(d -> d.doubleValue()).average().getAsDouble());
     }
 }
