@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,6 +29,8 @@ public class StandardDeviationController {
 
     @RequestMapping(value = "/standardDeviation", method = RequestMethod.POST)
     public StandardDeviation saveStandardDeviation(@RequestBody StandardDeviation sd) {
+        sd.setAnswer(calculateStandardDeviation(sd.getPoints()));
+        sd.setCreated(new Date());
         return _repo.save(sd);
     }
 
