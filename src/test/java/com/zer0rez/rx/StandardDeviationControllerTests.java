@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -27,6 +26,16 @@ public class StandardDeviationControllerTests {
 
     StandardDeviationRepository _repository;
 
+    static final BigDecimal[] _values;
+
+    static {
+        List<BigDecimal> valuesl = Stream.of(9f, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4)
+                .map(d -> BigDecimal.valueOf(d.doubleValue()))
+                .collect(Collectors.toList());
+        _values = new BigDecimal[valuesl.size()];
+        valuesl.toArray(_values);
+    }
+
     @Before
     public void setUp() {
         _repository = Mockito.mock(StandardDeviationRepository.class);
@@ -35,15 +44,9 @@ public class StandardDeviationControllerTests {
 
     @Test
     public void testCalcStdDev() {
-        List<BigDecimal> valuesl = Stream.of(9f, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4)
-                .map(d -> BigDecimal.valueOf(d.doubleValue()))
-                .collect(Collectors.toList());
-        BigDecimal[] values = new BigDecimal[valuesl.size()];
-        valuesl.toArray(values);
         BigDecimal expected = BigDecimal.valueOf(4f);
-        BigDecimal answer = _controller.calculateStandardDeviation(values);
+        BigDecimal answer = _controller.calculateStandardDeviation(_values);
         assertThat(expected).isEqualTo(answer);
     }
-
 }
 
