@@ -1,16 +1,18 @@
 package com.zer0rez.rx.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Document(collection = "standardDeviation")
 public class StandardDeviation {
     @Id
     private String id;
-    @JsonSerialize(using = DateSerializer.class)
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     private Date created;
     private BigDecimal answer;
     private BigDecimal[] points;
@@ -27,7 +29,9 @@ public class StandardDeviation {
         this.created = created;
     }
 
-    public BigDecimal getAnswer() { return answer; }
+    public BigDecimal getAnswer() {
+        return answer;
+    }
 
     public void setAnswer(BigDecimal answer) {
         this.answer = answer;

@@ -26,5 +26,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-groovy-templates')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
